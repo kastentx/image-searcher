@@ -4,6 +4,7 @@
   "description": "a full stack js app that allows you to search for images",
   "main": "server.js",
   "dependencies": {
+    "dotenv": "^2.0.0",
     "express": "^3.2.6"
   },
   "devDependencies": {},

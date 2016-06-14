@@ -1,9 +1,19 @@
-var express = require('express');
+
+require('dotenv').config()
+
+var googleKey = process.env.GOOGLEKEY
+var express = require('express')
 var path = require('path')
 var app = express()
 
-app.use(express.static(path.resolve(__dirname, 'client')));
+var portNum = process.env.PORT
 
-app.listen(process.env.PORT, function(port){
-  console.log("Listening at" + port);
+app.use(express.static(path.resolve(__dirname, 'client')))
+
+app.get('/', function(req, res) {
+    res.render('index.html')
+})
+
+app.listen(portNum, function(){
+  console.log("Listening at " + portNum)
 });
