@@ -3,11 +3,10 @@
 
 // load env vars for google search API
 require( 'dotenv' ).config( )
-var gKey = process.env.GOOGLEKEY
-var gID  = process.env.GOOGLEID
+
 var portNum = process.env.PORT
 
-var googleImages = require( 'google-images' )
+var imageSearch = require( 'node-google-image-search' )
 var express = require( 'express' )
 var path = require( 'path' )
 var app = express( )
@@ -19,14 +18,21 @@ app.get( '/', function( req, res ) {
 } )
 
 app.get( '/api/imagesearch/:keywords', function( req, res ) {
+  
   res.writeHead( 200, { "Content-Type" : "application/json" } )
   
+  var results = imageSearch( req.params.keywords, callback, 0, 5  )
+  
+  function callback( images ) {
+    res.end( JSON.stringify( images ) )
+  }
+  
+  
   var json = JSON.stringify(
-    "Here is a JSON response, " + req.params.keywords + "!"
+     "Here is a JSON response, " + req.params.keywords + "!"
     )
     
-  res.end(json)
-  
+  // res.end( json )
 } )
 
 app.listen( portNum, function( ) {

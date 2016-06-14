@@ -6,7 +6,7 @@
   "dependencies": {
     "dotenv": "^2.0.0",
     "express": "^3.2.6",
-    "google-images": "^1.0.0"
+    "node-google-image-search": "^1.0.2"
   },
   "devDependencies": {},
   "scripts": {
