@@ -1,0 +1,23 @@
+{
+  "name": "image-searcher",
+  "version": "1.0.0",
+  "description": "a full stack js app that allows you to search for images",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^3.2.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kastentx/image-searcher-git.git"
+  },
+  "author": "Nick Kasten <kastencode@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kastentx/image-searcher-git/issues"
+  },
+  "homepage": "https://github.com/kastentx/image-searcher-git#readme"
+}
