@@ -23,10 +23,10 @@ app.get( '/api/imagesearch/:keywords', function( req, res ) {
   
   var options = {
     url: 'https://www.googleapis.com/customsearch/' +
-        'v1?q=' + req.params.keywords + '&cx=' + process.env.CSE_ID +
-        '&lr=lang_en&searchType=image&fields=items' +
-        '(image%2FcontextLink%2Clink%2Csnippet%2Ctitle)&key=' + 
-        process.env.CSE_API_KEY
+         'v1?q=' + req.params.keywords + '&cx=' + process.env.CSE_ID +
+         '&lr=lang_en&searchType=image&fields=items' +
+         '(image%2FcontextLink%2Clink%2Csnippet%2Ctitle)&key=' + 
+         process.env.CSE_API_KEY
   }
   
   function callback ( err, response, body ) {
@@ -35,7 +35,14 @@ app.get( '/api/imagesearch/:keywords', function( req, res ) {
     }
     
     if ( !err && response.statusCode == 200 ) {
-      var results = JSON.parse( body )
+      var results = JSON.parse( body, function( key, value ) {
+        
+        if ( key == 'image' ) {
+          this.context = value.contextLink
+          return
+        }
+        return value
+      } )
       res.end( JSON.stringify( results ) )
     }
   }
