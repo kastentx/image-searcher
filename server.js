@@ -5,6 +5,7 @@
 require( 'dotenv' ).config( )
 
 var portNum = process.env.PORT
+var request = require('request')
 var imageSearch = require( 'node-google-image-search' )
 var express = require( 'express' )
 var path = require( 'path' )
@@ -18,14 +19,28 @@ app.get( '/', function( req, res ) {
 } )
 
 app.get( '/api/imagesearch/:keywords', function( req, res ) {
-  
   res.writeHead( 200, { 'Content-Type' : 'application/json' } )
   
-  var results = imageSearch( req.params.keywords, callback, 0, 5  )
-  
-  function callback( images ) {
-    res.end( JSON.stringify( images ) )
+  var options = {
+    url: 'https://www.googleapis.com/customsearch/' +
+        'v1?q=' + req.params.keywords + '&cx=' + process.env.CSE_ID +
+        '&lr=lang_en&searchType=image&fields=items' +
+        '(image%2FcontextLink%2Clink%2Csnippet%2Ctitle)&key=' + 
+        process.env.CSE_API_KEY
   }
+  
+  function callback ( err, response, body ) {
+    if ( err ) {
+      console.log( err )
+    }
+    
+    if ( !err && response.statusCode == 200 ) {
+      var results = JSON.parse( body )
+      res.end( JSON.stringify( results ) )
+    }
+  }
+  
+  request ( options, callback )
 })
 
 app.listen( portNum, function( ) {
