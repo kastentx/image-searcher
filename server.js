@@ -15,13 +15,16 @@ app.get( '/', function( req, res ) {
 } )
 
 app.get( '/api/imagesearch/:keywords', function( req, res ) {
-  res.writeHead( 200, { 'Content-Type' : 'application/json' } )
+  var startPos = 1
+  if ( typeof req.query.offset === 'string' ) {
+    startPos += parseInt( req.query.offset )
+  }
   var options = {
     url: 'https://www.googleapis.com/customsearch/' +
          'v1?q=' + req.params.keywords + '&cx=' + process.env.CSE_ID +
          '&lr=lang_en&searchType=image&fields=items' +
-         '(image%2FcontextLink%2Clink%2Csnippet%2Ctitle)&key=' + 
-         process.env.CSE_API_KEY
+         '(image%2FcontextLink%2Clink%2Csnippet%2Ctitle)&start=' + startPos + 
+         '&key=' + process.env.CSE_API_KEY
   }
   function callback ( err, response, body ) {
     if ( err ) {
@@ -35,6 +38,7 @@ app.get( '/api/imagesearch/:keywords', function( req, res ) {
         }
         return value
       } )
+      res.writeHead( 200, { 'Content-Type' : 'application/json' } )
       res.end( JSON.stringify( results ) )
     }
   }
