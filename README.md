@@ -1,3 +1,1 @@
-A Blank Express Server.
-
-Ready for routes!
+a full stack js app that performs a google image search on user supplied keywords.
