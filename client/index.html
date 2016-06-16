@@ -1,23 +1,27 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en">
   <head>
-    <title>Blank Express Server Index</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
-    <style>
-      body {
-        padding-top: 60px;
-      }
-    </style>
+    <title>PicSearch</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>body {padding: 2% 5% 5% 5%;} li { margin: .25%;}code {display: inline-block; margin: .5%}</style>
   </head>
   <body>
+    <h1>PicSearch - an image searching tool <small>created with full stack Javascript.</small></h1>
+    <br>
+    <br>
     <p>
-      Here is some sample text in the body.
+      Search for images by passing keywords in the URL, and use ?offset to skip through
+      results.
     </p>
-    
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/angular.min.js"></script>
+    <p>
+      Visit /api/latest/imagesearch to see the most recent search terms.
+    </p>
+    <br>
+    <h3>Example Usage:</h3>
+    <code>http://picsearch.herokuapp.com/api/imagesearch/Game of Thrones</code><br>
+    <code>http://picsearch.herokuapp.com/api/imagesearch/Game of Thrones?offset=10</code><br>
+    <code>http://picsearch.herokuapp.com/api/imagesearch/cybergoths</code><br>
+    <code>http://picsearch.herokuapp.com/api/imagesearch/Jumanji?offset=25</code><br>
+    <code>http://picsearch.herokuapp.com/api/latest/imagesearch</code>
   </body>
 </html>
